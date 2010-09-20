@@ -11,9 +11,11 @@ To generate the .mo files for the localized strings:
 
 This should be done automatically by setup.py.
 
-To build the application and the installer:
+To build the application and the installer, first:
+
+Copy the Microsoft.VC90.CRT\MSVCP90.dll into the application directory.
+
+Then: 
 
 clean.bat
 build.bat
-
-
