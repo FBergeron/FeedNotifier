@@ -1,0 +1,6 @@
+TODO
+====
+Generate the .mo file in setup.py.
+Introduce a parameter for the application language in the installer
+Port the application to Mac
+Port the application to Linux
