@@ -4,3 +4,330 @@
 
 msgid "Add Feed..."
 msgstr ""
+
+msgid "Preferences..."
+msgstr ""
+
+msgid "Disable Updates"
+msgstr ""
+
+msgid "Update Now"
+msgstr ""
+
+msgid "Enable Updates"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Add RSS/Atom Feed"
+msgstr ""
+
+msgid "Feed URL"
+msgstr ""
+
+msgid "< Back"
+msgstr ""
+
+msgid "Next >"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "The URL entered does not appear to be a valid RSS/Atom feed."
+msgstr ""
+
+msgid "Invalid Feed"
+msgstr ""
+
+msgid "Checking feed, please wait..."
+msgstr ""
+
+msgid "Password Required"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Edit RSS/Atom Feed"
+msgstr ""
+
+msgid "Feed Title"
+msgstr ""
+
+msgid "Feed Link"
+msgstr ""
+
+msgid "Polling Interval"
+msgstr ""
+
+msgid "The feed title will be shown in the pop-up window for items from this feed."
+msgstr ""
+
+msgid "The feed link will launch in your browser if you click on the feed title in a pop-up window."
+msgstr ""
+
+msgid "The polling interval specifies how often the application will check the feed for new items. When adding a new feed, the application automatically fills this in by examining the items in the feed."
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "Are you sure you want to check this feed every %d second(s)?\n\nYou might make the website administrator unhappy!"
+msgstr ""
+
+msgid "Confirm Polling Interval"
+msgstr ""
+
+msgid "Add Filter"
+msgstr ""
+
+msgid "Filter Rules"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Match Case"
+msgstr ""
+
+msgid "Match Whole Words"
+msgstr ""
+
+msgid "Apply Filter To"
+msgstr ""
+
+msgid "All Feeds"
+msgstr ""
+
+msgid "Selected Feeds"
+msgstr ""
+
+msgid "%s Preferences"
+msgstr ""
+
+msgid "Feeds"
+msgstr ""
+
+msgid "Pop-ups"
+msgstr ""
+
+msgid "Filters"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Interval"
+msgstr ""
+
+msgid "Items"
+msgstr ""
+
+msgid "Clicks"
+msgstr ""
+
+msgid "In"
+msgstr ""
+
+msgid "Out"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Add..."
+msgstr ""
+
+msgid "Import..."
+msgstr ""
+
+msgid "Edit..."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Are you sure you want to delete the selected feed(s)?"
+msgstr ""
+
+msgid "Confirm Delete"
+msgstr ""
+
+msgid "Are you sure you want to delete the selected filter(s)?"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Transparency"
+msgstr ""
+
+msgid "Monitor"
+msgstr ""
+
+msgid "Behavior"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "Step through new items"
+msgstr ""
+
+msgid "Play sound notification"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Max. Title Length"
+msgstr ""
+
+msgid "Max. Body Length"
+msgstr ""
+
+msgid "characters"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Don't check feeds if I've been idle for"
+msgstr ""
+
+msgid "Check for software updates automatically"
+msgstr ""
+
+msgid "Check Now"
+msgstr ""
+
+msgid "Caching"
+msgstr ""
+
+msgid "Item History"
+msgstr ""
+
+msgid "Feed Cache"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "items per feed"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Use a proxy server"
+msgstr ""
+
+msgid "Proxy"
+msgstr ""
+
+msgid "Format: http://<username>:<password>@<proxyserver>:<proxyport>"
+msgstr ""
+
+msgid "Upper Left"
+msgstr ""
+
+msgid "Upper Right"
+msgstr ""
+
+msgid "Lower Left"
+msgstr ""
+
+msgid "Lower Right"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Monitor #%d"
+msgstr ""
+
+msgid "pixels"
+msgstr ""
+
+msgid "[0-255], 255=opaque"
+msgstr ""
+
+msgid "second(s)"
+msgstr ""
+
+msgid "minute(s)"
+msgstr ""
+
+msgid "hour(s)"
+msgstr ""
+
+msgid "day(s)"
+msgstr ""
+
+msgid "Edit Filter"
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""

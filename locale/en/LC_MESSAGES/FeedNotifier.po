@@ -5,3 +5,329 @@
 msgid "Add Feed..."
 msgstr "Add Feed..."
 
+msgid "Preferences..."
+msgstr "Preferences..."
+
+msgid "Disable Updates"
+msgstr "Disable Updates"
+
+msgid "Update Now"
+msgstr "Update Now"
+
+msgid "Enable Updates"
+msgstr "Enable Updates"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Add RSS/Atom Feed"
+msgstr "Add RSS/Atom Feed"
+
+msgid "Feed URL"
+msgstr "Feed URL"
+
+msgid "< Back"
+msgstr "< Back"
+
+msgid "Next >"
+msgstr "Next >"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "The URL entered does not appear to be a valid RSS/Atom feed."
+msgstr "The URL entered does not appear to be a valid RSS/Atom feed."
+
+msgid "Invalid Feed"
+msgstr "Invalid Feed"
+
+msgid "Checking feed, please wait..."
+msgstr "Checking feed, please wait..."
+
+msgid "Password Required"
+msgstr "Password Required"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Edit RSS/Atom Feed"
+msgstr "Edit RSS/Atom Feed"
+
+msgid "Feed Title"
+msgstr "Titre de la Source"
+
+msgid "Feed Link"
+msgstr "Feed Link"
+
+msgid "Polling Interval"
+msgstr "Polling Interval"
+
+msgid "The feed title will be shown in the pop-up window for items from this feed."
+msgstr "The feed title will be shown in the pop-up window for items from this feed."
+
+msgid "The feed link will launch in your browser if you click on the feed title in a pop-up window."
+msgstr "The feed link will launch in your browser if you click on the feed title in a pop-up window."
+
+msgid "The polling interval specifies how often the application will check the feed for new items. When adding a new feed, the application automatically fills this in by examining the items in the feed."
+msgstr "The polling interval specifies how often the application will check the feed for new items. When adding a new feed, the application automatically fills this in by examining the items in the feed."
+
+msgid "Finish"
+msgstr "Finish"
+
+msgid "Are you sure you want to check this feed every %d second(s)?\n\nYou might make the website administrator unhappy!"
+msgstr "Are you sure you want to check this feed every %d second(s)?\n\nYou might make the website administrator unhappy!"
+
+msgid "Confirm Polling Interval"
+msgstr "Confirm Polling Interval"
+
+msgid "Add Filter"
+msgstr "Add Filter"
+
+msgid "Filter Rules"
+msgstr "Filter Rules"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Match Case"
+msgstr "Match Case"
+
+msgid "Match Whole Words"
+msgstr "Match Whole Words"
+
+msgid "Apply Filter To"
+msgstr "Apply Filter To"
+
+msgid "All Feeds"
+msgstr "All Feeds"
+
+msgid "Selected Feeds"
+msgstr "Selected Feeds"
+
+msgid "%s Preferences"
+msgstr "%s Preferences"
+
+msgid "Feeds"
+msgstr "Feeds"
+
+msgid "Pop-ups"
+msgstr "Pop-ups"
+
+msgid "Filters"
+msgstr "Filters"
+
+msgid "About"
+msgstr "About"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "On"
+msgstr "On"
+
+msgid "Interval"
+msgstr "Interval"
+
+msgid "Items"
+msgstr "Items"
+
+msgid "Clicks"
+msgstr "Clicks"
+
+msgid "In"
+msgstr "In"
+
+msgid "Out"
+msgstr "Out"
+
+msgid "All"
+msgstr "All"
+
+msgid "Add..."
+msgstr "Add..."
+
+msgid "Import..."
+msgstr "Import..."
+
+msgid "Edit..."
+msgstr "Edit..."
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Are you sure you want to delete the selected feed(s)?"
+msgstr "Are you sure you want to delete the selected feed(s)?"
+
+msgid "Confirm Delete"
+msgstr "Confirm Delete"
+
+msgid "Are you sure you want to delete the selected filter(s)?"
+msgstr "Are you sure you want to delete the selected filter(s)?"
+
+msgid "Appearance"
+msgstr "Appearance"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Transparency"
+msgstr "Transparency"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Behavior"
+msgstr "Behavior"
+
+msgid "Duration"
+msgstr "Duration"
+
+msgid "seconds"
+msgstr "seconds"
+
+msgid "Step through new items"
+msgstr "Step through new items"
+
+msgid "Play sound notification"
+msgstr "Play sound notification"
+
+msgid "Content"
+msgstr "Content"
+
+msgid "Max. Title Length"
+msgstr "Max. Title Length"
+
+msgid "Max. Body Length"
+msgstr "Max. Body Length"
+
+msgid "characters"
+msgstr "characters"
+
+msgid "General"
+msgstr "General"
+
+msgid "Don't check feeds if I've been idle for"
+msgstr "Don't check feeds if I've been idle for"
+
+msgid "Check for software updates automatically"
+msgstr "Check for software updates automatically"
+
+msgid "Check Now"
+msgstr "Check Now"
+
+msgid "Caching"
+msgstr "Caching"
+
+msgid "Item History"
+msgstr "Item History"
+
+msgid "Feed Cache"
+msgstr "Feed Cache"
+
+msgid "days"
+msgstr "days"
+
+msgid "items per feed"
+msgstr "items per feed"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Use a proxy server"
+msgstr "Use a proxy server"
+
+msgid "Proxy"
+msgstr "Proxy"
+
+msgid "Format: http://<username>:<password>@<proxyserver>:<proxyport>"
+msgstr "Format: http://<username>:<password>@<proxyserver>:<proxyport>"
+
+msgid "Upper Left"
+msgstr "Upper Left"
+
+msgid "Upper Right"
+msgstr "Upper Right"
+
+msgid "Lower Left"
+msgstr "Lower Left"
+
+msgid "Lower Right"
+msgstr "Lower Right"
+
+msgid "Center"
+msgstr "Center"
+
+msgid "Monitor #%d"
+msgstr "Monitor #%d"
+
+msgid "pixels"
+msgstr "pixels"
+
+msgid "[0-255], 255=opaque"
+msgstr "[0-255], 255=opaque"
+
+msgid "second(s)"
+msgstr "second(s)"
+
+msgid "minute(s)"
+msgstr "minute(s)"
+
+msgid "hour(s)"
+msgstr "hour(s)"
+
+msgid "day(s)"
+msgstr "day(s)"
+
+msgid "Edit Filter"
+msgstr "Edit Filter"
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""

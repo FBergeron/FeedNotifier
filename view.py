@@ -23,7 +23,7 @@ class TaskBarIcon(wx.TaskBarIcon):
         # I18n
         import gettext
         from gettext import gettext as _
-        gettext.install('FeedNotifier', './locale', unicode=False)
+        gettext.install('FeedNotifier', './locale', unicode=True)
         strings_en = gettext.translation('FeedNotifier', './locale', languages=['en'])
         strings_fr = gettext.translation('FeedNotifier', './locale', languages=['fr'])
         strings_fr.install()
@@ -34,17 +34,17 @@ class TaskBarIcon(wx.TaskBarIcon):
     def CreatePopupMenu(self):
         menu = wx.Menu()
         util.menu_item(menu, _('Add Feed...'), self.on_add_feed, 'icons/add.png')
-        util.menu_item(menu, 'Preferences...', self.on_settings, 'icons/cog.png')
+        util.menu_item(menu, _('Preferences...'), self.on_settings, 'icons/cog.png')
         menu.AppendSeparator()
         if self.controller.enabled:
-            util.menu_item(menu, 'Disable Updates', self.on_disable, 'icons/delete.png')
-            util.menu_item(menu, 'Update Now', self.on_force_update, 'icons/transmit.png')
+            util.menu_item(menu, _('Disable Updates'), self.on_disable, 'icons/delete.png')
+            util.menu_item(menu, _('Update Now'), self.on_force_update, 'icons/transmit.png')
         else:
-            util.menu_item(menu, 'Enable Updates', self.on_enable, 'icons/accept.png')
-            item = util.menu_item(menu, 'Update Now', self.on_force_update, 'icons/transmit.png')
+            util.menu_item(menu, _('Enable Updates'), self.on_enable, 'icons/accept.png')
+            item = util.menu_item(menu, _('Update Now'), self.on_force_update, 'icons/transmit.png')
             item.Enable(False)
         menu.AppendSeparator()
-        util.menu_item(menu, 'Exit', self.on_exit, 'icons/door_out.png')
+        util.menu_item(menu, _('Exit'), self.on_exit, 'icons/door_out.png')
         return menu
     def set_icon(self, path):
         icon = wx.IconFromBitmap(wx.Bitmap(path))
@@ -105,7 +105,7 @@ class AddFeedDialog(wx.Dialog):
                 return feed
             return None
     def __init__(self, parent, initial_url=''):
-        super(AddFeedDialog, self).__init__(parent, -1, 'Add RSS/Atom Feed')
+        super(AddFeedDialog, self).__init__(parent, -1, _('Add RSS/Atom Feed'))
         #self.SetIcon(wx.IconFromBitmap(wx.Bitmap('icons/feed.png')))
         self.initial_url = initial_url
         self.result = None
@@ -139,7 +139,7 @@ class AddFeedDialog(wx.Dialog):
         return panel
     def create_controls(self, parent):
         sizer = wx.GridBagSizer(8, 8)
-        label = wx.StaticText(parent, -1, 'Feed URL')
+        label = wx.StaticText(parent, -1, _('Feed URL'))
         font = label.GetFont()
         font.SetWeight(wx.FONTWEIGHT_BOLD)
         label.SetFont(font)
@@ -157,9 +157,9 @@ class AddFeedDialog(wx.Dialog):
         return sizer
     def create_buttons(self, parent):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        back = wx.Button(parent, wx.ID_BACKWARD, '< Back')
-        next = wx.Button(parent, wx.ID_FORWARD, 'Next >')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
+        back = wx.Button(parent, wx.ID_BACKWARD, _('< Back'))
+        next = wx.Button(parent, wx.ID_FORWARD, _('Next >'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
         back.Disable()
         next.SetDefault()
         next.Bind(wx.EVT_BUTTON, self.on_next)
@@ -186,7 +186,7 @@ class AddFeedDialog(wx.Dialog):
         self.result = result
         self.EndModal(wx.ID_OK)
     def on_invalid(self):
-        dialog = wx.MessageDialog(self, 'The URL entered does not appear to be a valid RSS/Atom feed.', 'Invalid Feed', wx.OK|wx.ICON_ERROR)
+        dialog = wx.MessageDialog(self, _('The URL entered does not appear to be a valid RSS/Atom feed.'), _('Invalid Feed'), wx.OK|wx.ICON_ERROR)
         dialog.Center()
         dialog.ShowModal()
         dialog.Destroy()
@@ -205,7 +205,7 @@ class AddFeedDialog(wx.Dialog):
     def lock(self):
         self.url.Disable()
         self.next.Disable()
-        self.status.SetLabel('Checking feed, please wait...')
+        self.status.SetLabel(_('Checking feed, please wait...'))
     def unlock(self):
         self.url.Enable()
         self.next.Enable()
@@ -229,7 +229,7 @@ class AddFeedDialog(wx.Dialog):
             
 class PasswordDialog(wx.Dialog):
     def __init__(self, parent, username=None, password=None):
-        super(PasswordDialog, self).__init__(parent, -1, 'Password Required')
+        super(PasswordDialog, self).__init__(parent, -1, _('Password Required'))
         panel = self.create_panel(self)
         if username:
             self.username.SetValue(username)
@@ -250,13 +250,13 @@ class PasswordDialog(wx.Dialog):
         return panel
     def create_controls(self, parent):
         sizer = wx.GridBagSizer(8, 8)
-        label = wx.StaticText(parent, -1, 'Username')
+        label = wx.StaticText(parent, -1, _('Username'))
         username = wx.TextCtrl(parent, -1, '', size=(180, -1))
         username.Bind(wx.EVT_TEXT, self.on_text)
         sizer.Add(label, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
         sizer.Add(username, (0, 1))
         self.username = username
-        label = wx.StaticText(parent, -1, 'Password')
+        label = wx.StaticText(parent, -1, _('Password'))
         password = wx.TextCtrl(parent, -1, '', size=(180, -1), style=wx.TE_PASSWORD)
         password.Bind(wx.EVT_TEXT, self.on_text)
         sizer.Add(label, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
@@ -264,8 +264,8 @@ class PasswordDialog(wx.Dialog):
         self.password = password
         return sizer
     def create_buttons(self, parent):
-        ok = wx.Button(parent, wx.ID_OK, 'OK')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
+        ok = wx.Button(parent, wx.ID_OK, _('OK'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
         ok.SetDefault()
         ok.Disable()
         self.ok = ok
@@ -285,7 +285,7 @@ class PasswordDialog(wx.Dialog):
         
 class EditFeedDialog(wx.Dialog):
     def __init__(self, parent, feed, add=False):
-        title = 'Add RSS/Atom Feed' if add else 'Edit RSS/Atom Feed'
+        title = _('Add RSS/Atom Feed') if add else _('Edit RSS/Atom Feed')
         super(EditFeedDialog, self).__init__(parent, -1, title)
         #self.SetIcon(wx.IconFromBitmap(wx.Bitmap('icons/feed.png')))
         self.feed = feed
@@ -312,7 +312,7 @@ class EditFeedDialog(wx.Dialog):
     def create_controls(self, parent):
         sizer = wx.GridBagSizer(8, 8)
         indexes = [0, 1, 3, 5]
-        labels = ['Feed URL', 'Feed Title', 'Feed Link', 'Polling Interval']
+        labels = [_('Feed URL'), _('Feed Title'), _('Feed Link'), _('Polling Interval')]
         for index, text in zip(indexes, labels):
             label = wx.StaticText(parent, -1, text)
             font = label.GetFont()
@@ -335,29 +335,29 @@ class EditFeedDialog(wx.Dialog):
         _interval, _units = util.split_time(self.feed.interval)
         interval = wx.SpinCtrl(parent, -1, str(_interval), min=1, max=60, size=(64, -1))
         units = wx.Choice(parent, -1)
-        units.Append('second(s)', 1)
-        units.Append('minute(s)', 60)
-        units.Append('hour(s)', 60*60)
-        units.Append('day(s)', 60*60*24)
+        units.Append(_('second(s)'), 1)
+        units.Append(_('minute(s)'), 60)
+        units.Append(_('hour(s)'), 60*60)
+        units.Append(_('day(s)'), 60*60*24)
         units.Select(_units)
         self.interval, self.units = interval, units
         sizer.Add(interval, (5, 1))
         sizer.Add(units, (5, 2))
-        label = wx.StaticText(parent, -1, 'The feed title will be shown in the pop-up window for items from this feed.')
+        label = wx.StaticText(parent, -1, _('The feed title will be shown in the pop-up window for items from this feed.'))
         label.Wrap(300)
         sizer.Add(label, (2, 1), (1, 2), flag=wx.ALIGN_CENTER_VERTICAL)
-        label = wx.StaticText(parent, -1, 'The feed link will launch in your browser if you click on the feed title in a pop-up window.')
+        label = wx.StaticText(parent, -1, _('The feed link will launch in your browser if you click on the feed title in a pop-up window.'))
         label.Wrap(300)
         sizer.Add(label, (4, 1), (1, 2), flag=wx.ALIGN_CENTER_VERTICAL)
-        label = wx.StaticText(parent, -1, 'The polling interval specifies how often the application will check the feed for new items. When adding a new feed, the application automatically fills this in by examining the items in the feed.')
+        label = wx.StaticText(parent, -1, _('The polling interval specifies how often the application will check the feed for new items. When adding a new feed, the application automatically fills this in by examining the items in the feed.'))
         label.Wrap(300)
         sizer.Add(label, (6, 1), (1, 2), flag=wx.ALIGN_CENTER_VERTICAL)
         return sizer
     def create_add_buttons(self, parent):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        back = wx.Button(parent, wx.ID_BACKWARD, '< Back')
-        next = wx.Button(parent, wx.ID_FORWARD, 'Finish')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
+        back = wx.Button(parent, wx.ID_BACKWARD, _('< Back'))
+        next = wx.Button(parent, wx.ID_FORWARD, _('Finish'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
         next.SetDefault()
         next.Bind(wx.EVT_BUTTON, self.on_next)
         back.Bind(wx.EVT_BUTTON, self.on_back)
@@ -371,8 +371,8 @@ class EditFeedDialog(wx.Dialog):
         return sizer
     def create_edit_buttons(self, parent):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        next = wx.Button(parent, wx.ID_FORWARD, 'OK')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
+        next = wx.Button(parent, wx.ID_FORWARD, _('OK'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
         next.SetDefault()
         next.Bind(wx.EVT_BUTTON, self.on_next)
         self.next = next
@@ -399,7 +399,7 @@ class EditFeedDialog(wx.Dialog):
         multiplier = self.units.GetClientData(self.units.GetSelection())
         interval = interval * multiplier
         if interval < 60:
-            dialog = wx.MessageDialog(self, 'Are you sure you want to check this feed every %d second(s)?\n\nYou might make the website administrator unhappy!' % interval, 'Confirm Polling Interval', wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
+            dialog = wx.MessageDialog(self, _('Are you sure you want to check this feed every %d second(s)?\n\nYou might make the website administrator unhappy!') % interval, _('Confirm Polling Interval'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
             result = dialog.ShowModal()
             dialog.Destroy()
             if result == wx.ID_NO:
@@ -411,7 +411,7 @@ class EditFeedDialog(wx.Dialog):
         
 class EditFilterDialog(wx.Dialog):
     def __init__(self, parent, model, filter=None):
-        title = 'Edit Filter' if filter else 'Add Filter'
+        title = _('Edit Filter') if filter else _('Add Filter')
         style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER
         super(EditFilterDialog, self).__init__(parent, -1, title, style=style)
         self.model = model
@@ -434,8 +434,8 @@ class EditFilterDialog(wx.Dialog):
         panel.SetSizer(sizer)
         return panel
     def create_buttons(self, parent):
-        ok = wx.Button(parent, wx.ID_OK, 'OK')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
+        ok = wx.Button(parent, wx.ID_OK, _('OK'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
         sizer = wx.BoxSizer(wx.HORIZONTAL)
         sizer.AddStretchSpacer(1)
         sizer.Add(ok)
@@ -446,7 +446,7 @@ class EditFilterDialog(wx.Dialog):
         self.ok = ok
         return sizer
     def create_rules(self, parent):
-        box = wx.StaticBox(parent, -1, 'Filter Rules')
+        box = wx.StaticBox(parent, -1, _('Filter Rules'))
         box = wx.StaticBoxSizer(box, wx.VERTICAL)
         code = wx.TextCtrl(parent, -1, self.filter.code, style=wx.TE_MULTILINE, size=(250, -1))
         text = '''
@@ -464,20 +464,20 @@ class EditFilterDialog(wx.Dialog):
         return box
     def create_options(self, parent):
         sizer = wx.BoxSizer(wx.VERTICAL)
-        box = wx.StaticBox(parent, -1, 'Options')
+        box = wx.StaticBox(parent, -1, _('Options'))
         box = wx.StaticBoxSizer(box, wx.VERTICAL)
-        match_case = wx.CheckBox(parent, -1, 'Match Case')
-        match_whole_words = wx.CheckBox(parent, -1, 'Match Whole Words')
+        match_case = wx.CheckBox(parent, -1, _('Match Case'))
+        match_whole_words = wx.CheckBox(parent, -1, _('Match Whole Words'))
         match_case.SetValue(not self.filter.ignore_case)
         match_whole_words.SetValue(self.filter.whole_word)
         box.Add(match_case, 0, wx.ALL, 8)
         box.Add(match_whole_words, 0, wx.ALL&~wx.TOP, 8)
         sizer.Add(box, 0, wx.EXPAND)
         sizer.AddSpacer(8)
-        box = wx.StaticBox(parent, -1, 'Apply Filter To')
+        box = wx.StaticBox(parent, -1, _('Apply Filter To'))
         box = wx.StaticBoxSizer(box, wx.VERTICAL)
-        all_feeds = wx.RadioButton(parent, -1, 'All Feeds', style=wx.RB_GROUP)
-        selected_feeds = wx.RadioButton(parent, -1, 'Selected Feeds')
+        all_feeds = wx.RadioButton(parent, -1, _('All Feeds'), style=wx.RB_GROUP)
+        selected_feeds = wx.RadioButton(parent, -1, _('Selected Feeds'))
         if self.filter.feeds:
             selected_feeds.SetValue(True)
         feeds = wx.CheckListBox(parent, -1, size=(150, 150), style=wx.LB_HSCROLL|wx.LB_EXTENDED)
@@ -664,7 +664,7 @@ class Model(object):
             
 class SettingsDialog(wx.Dialog):
     def __init__(self, parent, controller):
-        title = '%s Preferences' % settings.APP_NAME
+        title = _('%s Preferences') % settings.APP_NAME
         style = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER
         super(SettingsDialog, self).__init__(parent, -1, title, style=style)
         #self.SetIcon(wx.IconFromBitmap(wx.Bitmap('icons/feed.png')))
@@ -698,20 +698,20 @@ class SettingsDialog(wx.Dialog):
         options = OptionsPanel(notebook, self)
         filters = FiltersPanel(notebook, self)
         about = AboutPanel(notebook)
-        notebook.AddPage(feeds, 'Feeds', imageId=0)
-        notebook.AddPage(popups, 'Pop-ups', imageId=1)
-        notebook.AddPage(options, 'Options', imageId=2)
-        notebook.AddPage(filters, 'Filters', imageId=3)
-        notebook.AddPage(about, 'About', imageId=4)
+        notebook.AddPage(feeds, _('Feeds'), imageId=0)
+        notebook.AddPage(popups, _('Pop-ups'), imageId=1)
+        notebook.AddPage(options, _('Options'), imageId=2)
+        notebook.AddPage(filters, _('Filters'), imageId=3)
+        notebook.AddPage(about, _('About'), imageId=4)
         self.popups = popups
         self.options = options
         notebook.Fit()
         return notebook
     def create_buttons(self, parent):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        ok = wx.Button(parent, wx.ID_OK, 'OK')
-        cancel = wx.Button(parent, wx.ID_CANCEL, 'Cancel')
-        apply = wx.Button(parent, wx.ID_APPLY, 'Apply')
+        ok = wx.Button(parent, wx.ID_OK, _('OK'))
+        cancel = wx.Button(parent, wx.ID_CANCEL, _('Cancel'))
+        apply = wx.Button(parent, wx.ID_APPLY, _('Apply'))
         ok.Bind(wx.EVT_BUTTON, self.on_ok)
         apply.Bind(wx.EVT_BUTTON, self.on_apply)
         ok.SetDefault()
@@ -748,16 +748,16 @@ class FeedsList(wx.ListCtrl):
         images.AddWithColourMask(wx.Bitmap('icons/unchecked.png'), wx.WHITE)
         images.AddWithColourMask(wx.Bitmap('icons/checked.png'), wx.WHITE)
         self.AssignImageList(images, wx.IMAGE_LIST_SMALL)
-        self.InsertColumn(INDEX_ENABLED, 'On')
-        self.InsertColumn(INDEX_URL, 'Feed URL')
-        self.InsertColumn(INDEX_TITLE, 'Feed Title')
-        self.InsertColumn(INDEX_INTERVAL, 'Interval')
-        self.InsertColumn(INDEX_ITEM_COUNT, 'Items')
-        self.InsertColumn(INDEX_CLICKS, 'Clicks')
+        self.InsertColumn(INDEX_ENABLED, _('On'))
+        self.InsertColumn(INDEX_URL, _('Feed URL'))
+        self.InsertColumn(INDEX_TITLE, _('Feed Title'))
+        self.InsertColumn(INDEX_INTERVAL, _('Interval'))
+        self.InsertColumn(INDEX_ITEM_COUNT, _('Items'))
+        self.InsertColumn(INDEX_CLICKS, _('Clicks'))
         self.Bind(wx.EVT_LEFT_DOWN, self.on_left_down)
         self.Bind(wx.EVT_LIST_COL_CLICK, self.on_col_click)
         self.update()
-        self.SetColumnWidth(INDEX_ENABLED, 32)
+        self.SetColumnWidth(INDEX_ENABLED, 48)
         self.SetColumnWidth(INDEX_URL, 165)
         self.SetColumnWidth(INDEX_TITLE, 165)
         self.SetColumnWidth(INDEX_INTERVAL, 75)
@@ -807,15 +807,15 @@ class FiltersList(wx.ListCtrl):
         images.AddWithColourMask(wx.Bitmap('icons/unchecked.png'), wx.WHITE)
         images.AddWithColourMask(wx.Bitmap('icons/checked.png'), wx.WHITE)
         self.AssignImageList(images, wx.IMAGE_LIST_SMALL)
-        self.InsertColumn(INDEX_ENABLED, 'On')
-        self.InsertColumn(INDEX_RULES, 'Filter Rules')
-        self.InsertColumn(INDEX_FEEDS, 'Feeds')
-        self.InsertColumn(INDEX_IN, 'In')
-        self.InsertColumn(INDEX_OUT, 'Out')
+        self.InsertColumn(INDEX_ENABLED, _('On'))
+        self.InsertColumn(INDEX_RULES, _('Filter Rules'))
+        self.InsertColumn(INDEX_FEEDS, _('Feeds'))
+        self.InsertColumn(INDEX_IN, _('In'))
+        self.InsertColumn(INDEX_OUT, _('Out'))
         self.Bind(wx.EVT_LEFT_DOWN, self.on_left_down)
         self.Bind(wx.EVT_LIST_COL_CLICK, self.on_col_click)
         self.update()
-        self.SetColumnWidth(INDEX_ENABLED, 32)
+        self.SetColumnWidth(INDEX_ENABLED, 48)
         self.SetColumnWidth(INDEX_RULES, 200)
         self.SetColumnWidth(INDEX_FEEDS, 64)
         self.SetColumnWidth(INDEX_IN, 64)
@@ -845,7 +845,7 @@ class FiltersList(wx.ListCtrl):
         if column == INDEX_RULES:
             return filter.code.replace('\n', ' ')
         if column == INDEX_FEEDS:
-            return str(len(filter.feeds)) if filter.feeds else 'All'
+            return str(len(filter.feeds)) if filter.feeds else _('All')
         if column == INDEX_IN:
             return str(filter.inputs)
         if column == INDEX_OUT:
@@ -879,10 +879,10 @@ class FeedsPanel(wx.Panel):
         panel.SetSizerAndFit(sizer)
         return panel
     def create_buttons(self, parent):
-        new = wx.Button(parent, -1, 'Add...')
-        #import_feeds = wx.Button(parent, -1, 'Import...')
-        edit = wx.Button(parent, -1, 'Edit...')
-        delete = wx.Button(parent, -1, 'Delete')
+        new = wx.Button(parent, -1, _('Add...'))
+        #import_feeds = wx.Button(parent, -1, _('Import...'))
+        edit = wx.Button(parent, -1, _('Edit...'))
+        delete = wx.Button(parent, -1, _('Delete'))
         new.Bind(wx.EVT_BUTTON, self.on_new)
         edit.Bind(wx.EVT_BUTTON, self.on_edit)
         delete.Bind(wx.EVT_BUTTON, self.on_delete)
@@ -935,7 +935,7 @@ class FeedsPanel(wx.Panel):
             self.model.feeds.append(feed)
             self.update()
     def on_delete(self, event):
-        dialog = wx.MessageDialog(self.dialog, 'Are you sure you want to delete the selected feed(s)?', 'Confirm Delete', wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
+        dialog = wx.MessageDialog(self.dialog, _('Are you sure you want to delete the selected feed(s)?'), _('Confirm Delete'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
         result = dialog.ShowModal()
         dialog.Destroy()
         if result != wx.ID_YES:
@@ -980,9 +980,9 @@ class FiltersPanel(wx.Panel):
         panel.SetSizerAndFit(sizer)
         return panel
     def create_buttons(self, parent):
-        new = wx.Button(parent, -1, 'Add...')
-        edit = wx.Button(parent, -1, 'Edit...')
-        delete = wx.Button(parent, -1, 'Delete')
+        new = wx.Button(parent, -1, _('Add...'))
+        edit = wx.Button(parent, -1, _('Edit...'))
+        delete = wx.Button(parent, -1, _('Delete'))
         new.Bind(wx.EVT_BUTTON, self.on_new)
         edit.Bind(wx.EVT_BUTTON, self.on_edit)
         delete.Bind(wx.EVT_BUTTON, self.on_delete)
@@ -1037,7 +1037,7 @@ class FiltersPanel(wx.Panel):
             self.model.filters.append(filter)
             self.update()
     def on_delete(self, event):
-        dialog = wx.MessageDialog(self.dialog, 'Are you sure you want to delete the selected filter(s)?', 'Confirm Delete', wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
+        dialog = wx.MessageDialog(self.dialog, _('Are you sure you want to delete the selected filter(s)?'), _('Confirm Delete'), wx.YES_NO|wx.NO_DEFAULT|wx.ICON_QUESTION)
         result = dialog.ShowModal()
         dialog.Destroy()
         if result != wx.ID_YES:
@@ -1081,10 +1081,10 @@ class PopupsPanel(wx.Panel):
         panel.SetSizerAndFit(sizer)
         return panel
     def create_appearance(self, parent):
-        box = wx.StaticBox(parent, -1, 'Appearance')
+        box = wx.StaticBox(parent, -1, _('Appearance'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
-        labels = ['Theme', 'Width', 'Position', 'Transparency', 'Monitor']
+        labels = [_('Theme'), _('Width'), _('Position'), _('Transparency'), _('Monitor')]
         positions = [(0, 0), (0, 3), (1, 0), (1, 3), (2, 0)]
         for label, position in zip(labels, positions):
             text = wx.StaticText(parent, -1, label)
@@ -1093,24 +1093,24 @@ class PopupsPanel(wx.Panel):
         for name in util.find_themes():
             theme.Append(util.pretty_name(name), name)
         position = wx.Choice(parent, -1)
-        position.Append('Upper Left', (-1, -1))
-        position.Append('Upper Right', (1, -1))
-        position.Append('Lower Left', (-1, 1))
-        position.Append('Lower Right', (1, 1))
-        position.Append('Center', (0, 0))
+        position.Append(_('Upper Left'), (-1, -1))
+        position.Append(_('Upper Right'), (1, -1))
+        position.Append(_('Lower Left'), (-1, 1))
+        position.Append(_('Lower Right'), (1, 1))
+        position.Append(_('Center'), (0, 0))
         width = wx.SpinCtrl(parent, -1, '1', min=1, max=9999, size=(64, -1))
         transparency = wx.SpinCtrl(parent, -1, '0', min=0, max=255, size=(64, -1))
         display = wx.Choice(parent, -1)
         for index in range(wx.Display_GetCount()):
-            display.Append('Monitor #%d' % (index + 1), index)
+            display.Append(_('Monitor #%d') % (index + 1), index)
         grid.Add(theme, (0, 1), flag=wx.EXPAND)
         grid.Add(position, (1, 1), flag=wx.EXPAND)
         grid.Add(display, (2, 1), flag=wx.EXPAND)
         grid.Add(width, (0, 4))
         grid.Add(transparency, (1, 4))
-        text = wx.StaticText(parent, -1, 'pixels')
+        text = wx.StaticText(parent, -1, _('pixels'))
         grid.Add(text, (0, 5), flag=wx.ALIGN_CENTER_VERTICAL)
-        text = wx.StaticText(parent, -1, '[0-255], 255=opaque')
+        text = wx.StaticText(parent, -1, _('[0-255], 255=opaque'))
         grid.Add(text, (1, 5), flag=wx.ALIGN_CENTER_VERTICAL)
         sizer.Add(grid, 1, wx.EXPAND|wx.ALL, 8)
         
@@ -1127,18 +1127,18 @@ class PopupsPanel(wx.Panel):
         self.transparency = transparency
         return sizer
     def create_behavior(self, parent):
-        box = wx.StaticBox(parent, -1, 'Behavior')
+        box = wx.StaticBox(parent, -1, _('Behavior'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
         
-        text = wx.StaticText(parent, -1, 'Duration')
+        text = wx.StaticText(parent, -1, _('Duration'))
         grid.Add(text, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL)
-        text = wx.StaticText(parent, -1, 'seconds')
+        text = wx.StaticText(parent, -1, _('seconds'))
         grid.Add(text, (0, 2), flag=wx.ALIGN_CENTER_VERTICAL)
         
         duration = wx.SpinCtrl(parent, -1, '1', min=1, max=60, size=(64, -1))
-        auto = wx.CheckBox(parent, -1, 'Step through new items')
-        sound = wx.CheckBox(parent, -1, 'Play sound notification')
+        auto = wx.CheckBox(parent, -1, _('Step through new items'))
+        sound = wx.CheckBox(parent, -1, _('Play sound notification'))
         grid.Add(duration, (0, 1))
         grid.Add(auto, (0, 4), flag=wx.ALIGN_CENTER_VERTICAL)
         grid.Add(sound, (0, 6), flag=wx.ALIGN_CENTER_VERTICAL)
@@ -1154,17 +1154,17 @@ class PopupsPanel(wx.Panel):
         self.sound = sound
         return sizer
     def create_content(self, parent):
-        box = wx.StaticBox(parent, -1, 'Content')
+        box = wx.StaticBox(parent, -1, _('Content'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
         
-        text = wx.StaticText(parent, -1, 'Max. Title Length')
+        text = wx.StaticText(parent, -1, _('Max. Title Length'))
         grid.Add(text, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
-        text = wx.StaticText(parent, -1, 'Max. Body Length')
+        text = wx.StaticText(parent, -1, _('Max. Body Length'))
         grid.Add(text, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
-        text = wx.StaticText(parent, -1, 'characters')
+        text = wx.StaticText(parent, -1, _('characters'))
         grid.Add(text, (0, 2), flag=wx.ALIGN_CENTER_VERTICAL)
-        text = wx.StaticText(parent, -1, 'characters')
+        text = wx.StaticText(parent, -1, _('characters'))
         grid.Add(text, (1, 2), flag=wx.ALIGN_CENTER_VERTICAL)
         
         title = wx.SpinCtrl(parent, -1, '1', min=1, max=9999, size=(64, -1))
@@ -1234,21 +1234,21 @@ class OptionsPanel(wx.Panel):
         panel.SetSizerAndFit(sizer)
         return panel
     def create_general(self, parent):
-        box = wx.StaticBox(parent, -1, 'General')
+        box = wx.StaticBox(parent, -1, _('General'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
         
-        idle = wx.CheckBox(parent, -1, "Don't check feeds if I've been idle for")
+        idle = wx.CheckBox(parent, -1, _("Don't check feeds if I've been idle for"))
         grid.Add(idle, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL)
-        text = wx.StaticText(parent, -1, 'seconds')
+        text = wx.StaticText(parent, -1, _('seconds'))
         grid.Add(text, (0, 2), flag=wx.ALIGN_CENTER_VERTICAL)
         
         timeout = wx.SpinCtrl(parent, -1, '1', min=1, max=9999, size=(64, -1))
         grid.Add(timeout, (0, 1))
         
-        auto_update = wx.CheckBox(parent, -1, 'Check for software updates automatically')
+        auto_update = wx.CheckBox(parent, -1, _('Check for software updates automatically'))
         grid.Add(auto_update, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL)
-        check_now = wx.Button(parent, -1, 'Check Now')
+        check_now = wx.Button(parent, -1, _('Check Now'))
         grid.Add(check_now, (1, 1), flag=wx.ALIGN_CENTER_VERTICAL)
         
         sizer.Add(grid, 1, wx.EXPAND|wx.ALL, 8)
@@ -1264,17 +1264,17 @@ class OptionsPanel(wx.Panel):
         self.check_now = check_now
         return sizer
     def create_caching(self, parent):
-        box = wx.StaticBox(parent, -1, 'Caching')
+        box = wx.StaticBox(parent, -1, _('Caching'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
         
-        text = wx.StaticText(parent, -1, 'Item History')
+        text = wx.StaticText(parent, -1, _('Item History'))
         grid.Add(text, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
-        text = wx.StaticText(parent, -1, 'Feed Cache')
+        text = wx.StaticText(parent, -1, _('Feed Cache'))
         grid.Add(text, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT)
-        text = wx.StaticText(parent, -1, 'days')
+        text = wx.StaticText(parent, -1, _('days'))
         grid.Add(text, (0, 2), flag=wx.ALIGN_CENTER_VERTICAL)
-        text = wx.StaticText(parent, -1, 'items per feed')
+        text = wx.StaticText(parent, -1, _('items per feed'))
         grid.Add(text, (1, 2), flag=wx.ALIGN_CENTER_VERTICAL)
         
         item = wx.SpinCtrl(parent, -1, '1', min=1, max=365, size=(64, -1))
@@ -1282,9 +1282,9 @@ class OptionsPanel(wx.Panel):
         feed = wx.SpinCtrl(parent, -1, '1', min=1, max=9999, size=(64, -1))
         grid.Add(feed, (1, 1))
         
-        clear_item = wx.Button(parent, -1, 'Clear')
+        clear_item = wx.Button(parent, -1, _('Clear'))
         grid.Add(clear_item, (0, 3))
-        clear_feed = wx.Button(parent, -1, 'Clear')
+        clear_feed = wx.Button(parent, -1, _('Clear'))
         grid.Add(clear_feed, (1, 3))
         
         sizer.Add(grid, 1, wx.EXPAND|wx.ALL, 8)
@@ -1300,15 +1300,15 @@ class OptionsPanel(wx.Panel):
         self.clear_feed = clear_feed
         return sizer
     def create_proxy(self, parent):
-        box = wx.StaticBox(parent, -1, 'Proxy')
+        box = wx.StaticBox(parent, -1, _('Proxy'))
         sizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         grid = wx.GridBagSizer(8, 8)
         
-        use_proxy = wx.CheckBox(parent, -1, 'Use a proxy server')
+        use_proxy = wx.CheckBox(parent, -1, _('Use a proxy server'))
         grid.Add(use_proxy, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL)
         proxy_url = wx.TextCtrl(parent, -1)
         grid.Add(proxy_url, (1, 0), flag=wx.EXPAND)
-        text = wx.StaticText(parent, -1, 'Format: http://<username>:<password>@<proxyserver>:<proxyport>')
+        text = wx.StaticText(parent, -1, _('Format: http://<username>:<password>@<proxyserver>:<proxyport>'))
         grid.Add(text, (2, 0), flag=wx.ALIGN_CENTER_VERTICAL)
         
         sizer.Add(grid, 1, wx.EXPAND|wx.ALL, 8)
