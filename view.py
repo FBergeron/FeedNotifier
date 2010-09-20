@@ -19,12 +19,21 @@ INDEX_OUT = 4
 class TaskBarIcon(wx.TaskBarIcon):
     def __init__(self, controller):
         super(TaskBarIcon, self).__init__()
+
+        # I18n
+        import gettext
+        from gettext import gettext as _
+        gettext.install('FeedNotifier', './locale', unicode=False)
+        strings_en = gettext.translation('FeedNotifier', './locale', languages=['en'])
+        strings_fr = gettext.translation('FeedNotifier', './locale', languages=['fr'])
+        strings_fr.install()
+
         self.controller = controller
         self.set_icon('icons/feed.png')
         self.Bind(wx.EVT_TASKBAR_LEFT_DOWN, self.on_left_down)
     def CreatePopupMenu(self):
         menu = wx.Menu()
-        util.menu_item(menu, 'Add Feed...', self.on_add_feed, 'icons/add.png')
+        util.menu_item(menu, _('Add Feed...'), self.on_add_feed, 'icons/add.png')
         util.menu_item(menu, 'Preferences...', self.on_settings, 'icons/cog.png')
         menu.AppendSeparator()
         if self.controller.enabled:

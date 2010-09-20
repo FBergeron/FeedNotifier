@@ -1,0 +1,6 @@
+#
+# Localized strings
+#
+
+msgid "Add Feed..."
+msgstr "Ajouter Source..."
