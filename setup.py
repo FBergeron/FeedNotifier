@@ -56,14 +56,15 @@ sys.argv.append('py2exe')
 def get_data_files():
     def filter_files(files):
         def match(file):
-            extensions = ['.dat']
+            extensions = ['.dat','.po','.pot']
             for extension in extensions:
                 if file.endswith(extension):
                     return True
             return False
         return tuple(file for file in files if not match(file))
     def tree(src):
-        return [(root, map(lambda f: os.path.join(root, f), filter_files(files))) for (root, dirs, files) in os.walk(os.path.normpath(src)) if '.svn' not in root and '.svn' in dirs]
+        return [(root, map(lambda f: os.path.join(root, f), filter_files(files))) for (root, dirs, files) in os.walk(os.path.normpath(src))]
+        #return [(root, map(lambda f: os.path.join(root, f), filter_files(files))) for (root, dirs, files) in os.walk(os.path.normpath(src)) if '.svn' not in root and '.svn' in dirs]
     def include(src):
         result = tree(src)
         result = [('.', item[1]) for item in result]
@@ -72,6 +73,7 @@ def get_data_files():
     data_files += tree('./icons')
     data_files += tree('./sounds')
     data_files += tree('./Microsoft.VC90.CRT')
+    data_files += tree('./locale')
     return data_files
     
 # Build the distribution.
