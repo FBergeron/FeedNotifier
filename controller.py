@@ -5,7 +5,6 @@ import popups
 import view
 import updater
 import util
-import winsound
 from settings import settings
 
 class Controller(object):
