@@ -1,6 +1,9 @@
 #
 # Localized strings
 #
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=iso-8859-1\n"
 
 msgid "Add Feed..."
 msgstr "Ajouter source..."
@@ -292,42 +295,3 @@ msgstr "jour(s)"
 
 msgid "Edit Filter"
 msgstr "Édition d'un filtre"
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
