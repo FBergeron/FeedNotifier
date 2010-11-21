@@ -4,3 +4,4 @@ Generate the .mo file in setup.py.
 Introduce a parameter for the application language in the installer
 Port the application to Mac
 Port the application to Linux
+The installer could probably be localized in french easily.  Actually, we should generate both installers.

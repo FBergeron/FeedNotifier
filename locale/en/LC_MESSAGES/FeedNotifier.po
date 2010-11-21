@@ -296,3 +296,27 @@ msgstr "day(s)"
 
 msgid "Edit Filter"
 msgstr "Edit Filter"
+
+msgid "Feed Notifier Update"
+msgstr "Feed Notifier Update"
+
+msgid "Downloading update, please wait..."
+msgstr "Downloading update, please wait..."
+
+msgid "Update Failed"
+msgstr "Update Failed"
+
+msgid "Failed to download updates. Nothing will be installed at this time."
+msgstr "Failed to download updates. Nothing will be installed at this time."
+
+msgid "Update Feed Notifier?"
+msgstr "Update Feed Notifier?"
+
+msgid "Feed Notifier software updates are available.  Download and install now?"
+msgstr "Feed Notifier software updates are available.  Download and install now?"
+
+msgid "No Updates"
+msgstr "No Updates"
+
+msgid "No software updates are available at this time."
+msgstr "No software updates are available at this time."

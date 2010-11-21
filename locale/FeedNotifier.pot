@@ -293,41 +293,26 @@ msgstr ""
 msgid "Edit Filter"
 msgstr ""
 
-msgid ""
+msgid "Feed Notifier Update"
 msgstr ""
 
-msgid ""
+msgid "Downloading update, please wait..."
 msgstr ""
 
-msgid ""
+msgid "Update Failed"
 msgstr ""
 
-msgid ""
+msgid "Failed to download updates. Nothing will be installed at this time."
 msgstr ""
 
-msgid ""
+msgid "Update Feed Notifier?"
 msgstr ""
 
-msgid ""
+msgid "Feed Notifier software updates are available.  Download and install now?"
 msgstr ""
 
-msgid ""
+msgid "No Updates"
 msgstr ""
 
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
+msgid "No software updates are available at this time."
 msgstr ""

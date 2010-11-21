@@ -295,3 +295,27 @@ msgstr "jour(s)"
 
 msgid "Edit Filter"
 msgstr "Édition d'un filtre"
+
+msgid "Feed Notifier Update"
+msgstr "Mise à jour automatique"
+
+msgid "Downloading update, please wait..."
+msgstr "Téléchargement en cours, veuillez patienter..."
+
+msgid "Update Failed"
+msgstr "Mise à jour infructueuse"
+
+msgid "Failed to download updates. Nothing will be installed at this time."
+msgstr "La mise à jour n'a pas fonctionné correctement. Aucune composante ne sera installée."
+
+msgid "Update Feed Notifier?"
+msgstr "Désirez-vous effectuer la mise à jour?"
+
+msgid "Feed Notifier software updates are available.  Download and install now?"
+msgstr "Une version plus récente est disponible.  Voulez-vous la télécharger et l'installer maintenant?"
+
+msgid "No Updates"
+msgstr "Application à jour"
+
+msgid "No software updates are available at this time."
+msgstr "Il n' y a pas de mise à jour disponible actuellement."

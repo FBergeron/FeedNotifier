@@ -2,6 +2,7 @@ import wx
 import util
 import feeds
 import filters
+import platform
 from settings import settings
 
 INDEX_ENABLED = 0
@@ -23,7 +24,7 @@ class TaskBarIcon(wx.TaskBarIcon):
         # I18n
         import gettext
         from gettext import gettext as _
-        gettext.install('FeedNotifier', './locale', unicode=True)
+        gettext.install('FeedNotifier', './locale', unicode=False)
         strings_en = gettext.translation('FeedNotifier', './locale', languages=['en'])
         strings_fr = gettext.translation('FeedNotifier', './locale', languages=['fr'])
         strings_fr.install()
@@ -1246,22 +1247,28 @@ class OptionsPanel(wx.Panel):
         timeout = wx.SpinCtrl(parent, -1, '1', min=1, max=9999, size=(64, -1))
         grid.Add(timeout, (0, 1))
         
-        auto_update = wx.CheckBox(parent, -1, _('Check for software updates automatically'))
-        grid.Add(auto_update, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL)
-        check_now = wx.Button(parent, -1, _('Check Now'))
-        grid.Add(check_now, (1, 1), flag=wx.ALIGN_CENTER_VERTICAL)
+        if platform.system() == 'Windows':
+            auto_update = wx.CheckBox(parent, -1, _('Check for software updates automatically'))
+            grid.Add(auto_update, (1, 0), flag=wx.ALIGN_CENTER_VERTICAL)
+            check_now = wx.Button(parent, -1, _('Check Now'))
+            grid.Add(check_now, (1, 1), flag=wx.ALIGN_CENTER_VERTICAL)
+
+            auto_update.Bind(wx.EVT_CHECKBOX, self.on_change)
+            check_now.Bind(wx.EVT_BUTTON, self.on_check_now)
+
+            self.auto_update = auto_update
+            self.check_now = check_now
+        else:
+            self.auto_update = None
+            self.check_now = None
         
         sizer.Add(grid, 1, wx.EXPAND|wx.ALL, 8)
         
         timeout.Bind(wx.EVT_SPINCTRL, self.on_change)
         idle.Bind(wx.EVT_CHECKBOX, self.on_change)
-        auto_update.Bind(wx.EVT_CHECKBOX, self.on_change)
-        check_now.Bind(wx.EVT_BUTTON, self.on_check_now)
         
         self.idle = idle
         self.timeout = timeout
-        self.auto_update = auto_update
-        self.check_now = check_now
         return sizer
     def create_caching(self, parent):
         box = wx.StaticBox(parent, -1, _('Caching'))
@@ -1323,7 +1330,8 @@ class OptionsPanel(wx.Panel):
         model = self.model
         self.idle.SetValue(model.DISABLE_WHEN_IDLE)
         self.timeout.SetValue(model.USER_IDLE_TIMEOUT)
-        self.auto_update.SetValue(model.CHECK_FOR_UPDATES)
+        if self.auto_update != None:
+            self.auto_update.SetValue(model.CHECK_FOR_UPDATES)
         one_day = 60 * 60 * 24
         self.item.SetValue(model.ITEM_CACHE_AGE / one_day)
         self.feed.SetValue(model.FEED_CACHE_SIZE)
@@ -1334,7 +1342,8 @@ class OptionsPanel(wx.Panel):
         model = self.model
         model.DISABLE_WHEN_IDLE = self.idle.GetValue()
         model.USER_IDLE_TIMEOUT = self.timeout.GetValue()
-        model.CHECK_FOR_UPDATES = self.auto_update.GetValue()
+        if self.auto_update != None:
+            model.CHECK_FOR_UPDATES = self.auto_update.GetValue()
         one_day = 60 * 60 * 24
         model.ITEM_CACHE_AGE = self.item.GetValue() * one_day
         model.FEED_CACHE_SIZE = self.feed.GetValue()
@@ -1354,8 +1363,9 @@ class OptionsPanel(wx.Panel):
         self.model.controller.manager.clear_feed_cache()
         self.clear_feed.Disable()
     def on_check_now(self, event):
-        self.check_now.Disable()
-        self.model.controller.check_for_updates()
+        if self.check_now != None:
+            self.check_now.Disable()
+            self.model.controller.check_for_updates()
         
 class AboutPanel(wx.Panel):
     def __init__(self, parent):
@@ -1366,7 +1376,7 @@ class AboutPanel(wx.Panel):
         sizer.Add(line, 0, wx.EXPAND)
         sizer.Add(panel, 1, wx.EXPAND|wx.ALL, 8)
         credits = '''
-        %s %s :: Build %d :: Copyright (c) 2009-2010, Michael Fogleman
+        %s %s :: Copyright (c) 2009-2010, Michael Fogleman, Frederic Bergeron, Marc-Antoine Parent
         
         16x16px icons in this application are from the Silk Icon set provided by Mark James under a Creative Commons Attribution 2.5 License. http://www.famfamfam.com/lab/icons/silk/
         
@@ -1409,7 +1419,7 @@ class AboutPanel(wx.Panel):
         * Neither the name of the David Beazley or Dabeaz LLC may be used to endorse or promote products derived from this software without specific prior written permission.
         
         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        ''' % (settings.APP_NAME, settings.APP_VERSION, settings.LOCAL_REVISION)
+        ''' % (settings.APP_NAME, settings.APP_VERSION)
         credits = '\n'.join(line.strip() for line in credits.strip().split('\n'))
         text = wx.TextCtrl(self, -1, credits, style=wx.TE_MULTILINE|wx.TE_READONLY)
         text.SetBackgroundColour(self.GetBackgroundColour())
@@ -1426,3 +1436,4 @@ class AboutPanel(wx.Panel):
         panel.SetSizerAndFit(sizer)
         return panel
         
+

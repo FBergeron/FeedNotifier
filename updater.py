@@ -11,11 +11,11 @@ class CancelException(Exception):
     
 class DownloadDialog(wx.Dialog):
     def __init__(self, parent):
-        super(DownloadDialog, self).__init__(parent, -1, 'Feed Notifier Update')
+        super(DownloadDialog, self).__init__(parent, -1, _('Feed Notifier Update'))
         self.path = None
-        text = wx.StaticText(self, -1, 'Downloading update, please wait...')
+        text = wx.StaticText(self, -1, _('Downloading update, please wait...'))
         self.gauge = wx.Gauge(self, -1, 100, size=(250, 16))
-        cancel = wx.Button(self, wx.ID_CANCEL, 'Cancel')
+        cancel = wx.Button(self, wx.ID_CANCEL, _('Cancel'))
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(text)
         sizer.AddSpacer(8)
@@ -37,7 +37,7 @@ class DownloadDialog(wx.Dialog):
         except Exception:
             wx.CallAfter(self.on_fail)
     def on_fail(self):
-        dialog = wx.MessageDialog(self, 'Failed to download updates. Nothing will be installed at this time.', 'Update Failed', wx.OK|wx.ICON_ERROR)
+        dialog = wx.MessageDialog(self, _('Failed to download updates. Nothing will be installed at this time.'), _('Update Failed'), wx.OK|wx.ICON_ERROR)
         dialog.ShowModal()
         dialog.Destroy()
         self.EndModal(wx.ID_CANCEL)
@@ -52,11 +52,14 @@ class DownloadDialog(wx.Dialog):
         else:
             raise CancelException
             
-def get_remote_revision():
+def get_remote_version():
     file = None
     try:
-        file = urllib.urlopen(settings.REVISION_URL)
-        return int(file.read().strip())
+        file = urllib.urlopen(settings.VERSION_URL)
+        version = file.read()
+        [ major, minor, micro ] = version.split('.')
+        checksum = int(major) * 10000 + int(minor) * 100 + int(micro)
+        return checksum 
     except Exception:
         return -1
     finally:
@@ -81,8 +84,8 @@ def should_update(force):
             return False
     now = int(time.time())
     settings.UPDATE_TIMESTAMP = now
-    local = settings.LOCAL_REVISION
-    remote = get_remote_revision()
+    local = settings.LOCAL_VERSION
+    remote = get_remote_version()
     if local < 0 or remote < 0:
         return False
     return remote > local
@@ -94,13 +97,13 @@ def do_check(controller, force=False):
         wx.CallAfter(do_tell, controller)
         
 def do_ask(controller):
-    dialog = wx.MessageDialog(controller.frame, 'Feed Notifier software updates are available.  Download and install now?', 'Update Feed Notifier?', wx.YES_NO|wx.YES_DEFAULT|wx.ICON_QUESTION)
+    dialog = wx.MessageDialog(controller.frame, _('Feed Notifier software updates are available.  Download and install now?'), _('Update Feed Notifier?'), wx.YES_NO|wx.YES_DEFAULT|wx.ICON_QUESTION)
     if dialog.ShowModal() == wx.ID_YES:
         do_download(controller)
     dialog.Destroy()
     
 def do_tell(controller):
-    dialog = wx.MessageDialog(controller.frame, 'No software updates are available at this time.', 'No Updates', wx.OK|wx.ICON_INFORMATION)
+    dialog = wx.MessageDialog(controller.frame, _('No software updates are available at this time.'), _('No Updates'), wx.OK|wx.ICON_INFORMATION)
     dialog.ShowModal()
     dialog.Destroy()
     
@@ -122,3 +125,4 @@ def run(controller, force=False):
     if force or settings.CHECK_FOR_UPDATES:
         util.start_thread(do_check, controller, force)
         
+

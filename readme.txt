@@ -19,3 +19,16 @@ Then:
 
 clean.bat
 build.bat
+
+Checklist before releasing a new version:
+    - Update the version number at the following locations
+        - installer.iss (AppVerName,OutputBaseFilename)
+        - setup.py (get_revision(),manifest's description)
+        - defaults.py (APP_VERSION)
+        - www.fbergeron.com/feednotifier/version.txt
+    - Clean and rebuild
+    - Upload installer 
+        - www.fbergeron.com/feednotifier/installer.exe
+        - github download files section
+
+

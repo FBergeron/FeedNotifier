@@ -12,7 +12,7 @@ manifestVersion="1.0">
     name="Feed Notifier"
     type="win32"
   />
-  <description>Feed Notifier 2.3</description>
+  <description>Feed Notifier 2.3.1 (fr)</description>
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
     <security>
       <requestedPrivileges>
@@ -94,21 +94,15 @@ setup(
 )
 
 # Build Information
-def get_revision():
-    try:
-        import pysvn
-        client = pysvn.Client()
-        entry = client.info('.')
-        return entry.revision.number
-    except Exception:
-        return -1
+def get_version():
+    return '2.3.1'
         
 def save_build_info():
-    revision = get_revision()
-    path = 'dist/revision.txt'
+    version = get_version()
+    path = 'dist/version.txt'
     with open(path, 'w') as file:
-        file.write(str(revision))
+        file.write(version)
     print
-    print 'Saved build revision %d to %s' % (revision, path)
+    print 'Saved build version %s to %s' % (version, path)
     
 save_build_info()
